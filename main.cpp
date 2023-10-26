@@ -15,50 +15,49 @@
         
 using namespace std;
 
-string encript(string& input, int password){
-	for (int i =0; i< input.size();i++){
-		input[i] += pow(password,2);
-	}
-	return input;
+string encript(string& input, int password) {
+    for (int i = 0; i < input.size(); i++) {
+        input[i] = char(input[i] + pow(password,2)); // Use char() to avoid integer overflow
+    }
+    return input;
 }
 
-string decript(string& input, int password){
-	for (int i =0; i< input.size();i++){
-		input[i] -= pow(password,2);
-	}
-	return input;
+string decript(string& input, int password) {
+    for (int i = 0; i < input.size(); i++) {
+        input[i] = char(input[i] - pow(password,2)); // Use char() to avoid integer overflow
+    }
+    return input;
 }
-
 int main(){
 
 	while (1){
 
 	string x;
-	cout << "Decript or Encript(D/E): " << endl;
+	printf("%s\n", "Decript or Encript(D/E): ");
 	cin >> x;
 
-	bool isEncript = (x.compare("D") == 0)? true : false;
-	bool isDecript = (x.compare("E") == 0)? true : false;
+	bool isEncript = (x.compare("E") == 0)? true : false;
+	bool isDecript = (x.compare("D") == 0)? true : false;
 
 
 
 	if (isEncript){
-		cout << "Your text: "<< endl;
+		printf("%s\n", "Your text: ");
 		string something;
-		cin >> something;
-		cout << "password: "<< endl;
+		getline(cin >> ws,something);
+		printf("%s\n", "Password: ");
 		int password;
 		cin >> password;
-		string outcome =encript(something, password);
+		string outcome = encript(something, password);
 		cout << outcome << endl;
 	}else if (isDecript){
-		cout << "Encripted text: "<< endl;
+		printf("%s\n", "Encripted text: ");
 		string something1;
-		cin >> something1;
-		cout << "Password: "<< endl;
+		getline(cin >> ws,something1);
+		printf("%s\n", "Password: ");
 		int password1;
 		cin >> password1;
-		string outcome1 =decript(something1, password1);
+		string outcome1 = decript(something1, password1);
 		cout << outcome1 << endl;
 
 	}
